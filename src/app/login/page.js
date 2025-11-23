@@ -13,23 +13,29 @@ export default function LoginPage() {
   const SECRET_CODE = 'AbdullahCheemaGenAI';
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+  e.preventDefault();
+  setError('');
+  setLoading(true);
 
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+  console.log("👉 User entered code:", code);
+  console.log("👉 SECRET_CODE:", SECRET_CODE);
+  console.log("👉 Match status:", code === SECRET_CODE);
 
-    if (code === SECRET_CODE) {
-      // Store auth status in sessionStorage
-      sessionStorage.setItem('authenticated', 'true');
-      router.push('/');
-    } else {
-      setError('Invalid secret code. Please try again.');
-      setCode('');
-      setLoading(false);
-    }
-  };
+  // Simulate API call delay
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  if (code === SECRET_CODE) {
+    console.log("✅ Login success — redirecting...");
+    sessionStorage.setItem('authenticated', 'true');
+    router.push('/');
+  } else {
+    console.log("❌ Login failed — codes do not match");
+    setError('Invalid secret code. Please try again.');
+    setCode('');
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-teal-800 to-emerald-950 flex items-center justify-center p-4 relative overflow-hidden">
